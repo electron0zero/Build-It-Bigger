@@ -1,13 +1,14 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.electron0zero.jokelib.joker;
+import com.wordpress.electron0zero.jokelib_android.DisplayJokeActivity;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -22,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -44,7 +45,12 @@ public class MainActivity extends ActionBarActivity {
     public void tellJoke(View view) {
         joker joker = new joker();
 
-        Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
+//        launch display joke activity from jokelib_android
+        Intent intent = new Intent(this, DisplayJokeActivity.class);
+        intent.putExtra("joke", joker.getJoke());
+        startActivity(intent);
+
+//        Toast.makeText(this, joker.getJoke(), Toast.LENGTH_SHORT).show();
     }
 
 
