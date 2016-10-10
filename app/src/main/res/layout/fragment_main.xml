@@ -18,11 +18,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btn_tell_joke"
         android:layout_below="@+id/instructions_text_view"
-        android:onClick="tellJoke"
-        android:text="@string/button_text"
+        android:text="@string/button_text" />
 
-        />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/joke_progress_bar"
+        android:layout_centerInParent="true"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -31,6 +35,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
 </RelativeLayout>
