@@ -2,15 +2,20 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -22,11 +27,18 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    // Added for AdMob
     compile project(":jokelib")
     compile project(":jokelib_android")
+    compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:24.2.1'
+    // Added for AdMob
     compile 'com.google.android.gms:play-services-ads:9.4.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
-    compile project(path: ':backend', configuration: 'android-endpoints')
+
+    //testing
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support:support-annotations:24.2.1'
+    androidTestCompile 'org.hamcrest:hamcrest-core:1.3'
 }
