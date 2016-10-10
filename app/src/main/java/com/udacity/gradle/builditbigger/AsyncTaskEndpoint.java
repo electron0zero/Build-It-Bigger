@@ -13,12 +13,17 @@ import com.wordpress.electron0zero.jokelib_android.DisplayJokeActivity;
 
 import java.io.IOException;
 
-class AsyncTaskEndpoint extends AsyncTask<Context, Void, String> {
+class AsyncTaskEndpoint extends AsyncTask<MainActivityFragment, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private MainActivityFragment mainActivityFragment;
 
     @Override
-    protected String doInBackground(Context... params) {
+    protected String doInBackground(MainActivityFragment... params) {
+
+        mainActivityFragment = params[0];
+        context = mainActivityFragment.getActivity();
+
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -37,8 +42,6 @@ class AsyncTaskEndpoint extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
-
 
         try {
             return myApiService.getJoke().execute().getData();
@@ -50,10 +53,16 @@ class AsyncTaskEndpoint extends AsyncTask<Context, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         // Create Intent to launch JokeFactory Activity
-        Intent intent = new Intent(context, DisplayJokeActivity.class);
+        // Intent intent = new Intent(context, DisplayJokeActivity.class);
         // Put the string in the envelope
-        intent.putExtra(DisplayJokeActivity.JOKE_KEY,result);
-        context.startActivity(intent);
+        // intent.putExtra(DisplayJokeActivity.JOKE_KEY,result);
+        // context.startActivity(intent);
+
         //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+        // get joke and display it
+        mainActivityFragment.joke_loaded = result;
+        mainActivityFragment.launchDisplayJokeActivity();
+
     }
 }
