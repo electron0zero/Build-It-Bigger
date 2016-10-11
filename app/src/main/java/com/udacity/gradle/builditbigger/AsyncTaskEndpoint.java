@@ -1,7 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.example.electron.myapplication.backend.myApi.MyApi;
@@ -9,7 +8,6 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.wordpress.electron0zero.jokelib_android.DisplayJokeActivity;
 
 import java.io.IOException;
 

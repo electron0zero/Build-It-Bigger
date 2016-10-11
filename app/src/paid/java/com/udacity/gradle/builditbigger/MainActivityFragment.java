@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.wordpress.electron0zero.jokelib_android.DisplayJokeActivity;
 
 
@@ -32,34 +30,25 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        AdView mAdView = (AdView) root.findViewById(R.id.adView);
 
-        // show joke on button click
-
+        // Set onClickListener for the button
         Button button = (Button) root.findViewById(R.id.btn_tell_joke);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                tellJoke();
+                getJoke();
             }
         });
 
         progressBar = (ProgressBar) root.findViewById(R.id.joke_progress_bar);
         progressBar.setVisibility(View.GONE);
 
-        // TODO: 11-10-16 FIX THIS SO WE CAN SEE AD ON REAL DEVICE
-        // Create an ad request. Check logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mAdView.loadAd(adRequest);
-        return root;
 
+        return root;
     }
-    public void tellJoke(){
+
+    public void getJoke(){
         new AsyncTaskEndpoint().execute(this);
     }
 
@@ -73,4 +62,5 @@ public class MainActivityFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
         }
     }
+
 }
