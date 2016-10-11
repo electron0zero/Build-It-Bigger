@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 import com.wordpress.electron0zero.jokelib_android.DisplayJokeActivity;
 
 
@@ -23,25 +26,63 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
-    ProgressBar progressBar = null;
+    private ProgressBar progressBar = null;
     public String joke_loaded = null;
     public boolean testFlag = false;
+    PublisherInterstitialAd mPublisherInterstitialAd = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //Set up for pre-fetching interstitial ad request
+        mPublisherInterstitialAd = new PublisherInterstitialAd(getContext());
+        mPublisherInterstitialAd.setAdUnitId("ca-app-pub-7867604826748291/8122977163");
+
+        mPublisherInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                //process the joke Request
+                progressBar.setVisibility(View.VISIBLE);
+                tellJoke();
+
+                //pre-fetch the next ad
+                requestNewInterstitial();
+            }
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                //prefetch the next ad
+                requestNewInterstitial();
+            }
+            @Override
+            public void onAdLoaded() {
+
+                super.onAdLoaded();
+            }
+        });
+
+        //Kick off the fetch
+        requestNewInterstitial();
+
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
 
         // show joke on button click
-
         Button button = (Button) root.findViewById(R.id.btn_tell_joke);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                tellJoke();
+                if (mPublisherInterstitialAd.isLoaded()) {
+                    mPublisherInterstitialAd.show();
+                } else {
+                    progressBar.setVisibility(View.VISIBLE);
+                    tellJoke();
+                }
+//                progressBar.setVisibility(View.VISIBLE);
+//                tellJoke();
             }
         });
 
@@ -58,7 +99,7 @@ public class MainActivityFragment extends Fragment {
         return root;
 
     }
-    public void tellJoke(){
+    private void tellJoke(){
         new AsyncTaskEndpoint().execute(this);
     }
 
@@ -71,5 +112,12 @@ public class MainActivityFragment extends Fragment {
             context.startActivity(intent);
             progressBar.setVisibility(View.GONE);
         }
+    }
+    private void requestNewInterstitial() {
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mPublisherInterstitialAd.loadAd(adRequest);
     }
 }

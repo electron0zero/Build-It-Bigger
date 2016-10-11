@@ -13,14 +13,13 @@ import java.io.IOException;
 
 class AsyncTaskEndpoint extends AsyncTask<MainActivityFragment, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
     private MainActivityFragment mainActivityFragment;
 
     @Override
     protected String doInBackground(MainActivityFragment... params) {
 
         mainActivityFragment = params[0];
-        context = mainActivityFragment.getActivity();
+        Context context = mainActivityFragment.getActivity();
 
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),

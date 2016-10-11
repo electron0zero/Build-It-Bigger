@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class DisplayJokeActivity extends AppCompatActivity {
 
-    public static String JOKE_KEY = "JOKE_KEY";
+    public static final String JOKE_KEY = "JOKE_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class DisplayJokeActivity extends AppCompatActivity {
         if (joke != null){
             jokeview.setText(joke);
         }else {
-            jokeview.setText("your joke dealer failed to deliver a joke");
+            jokeview.setText(R.string.no_joke_string);
         }
     }
 }

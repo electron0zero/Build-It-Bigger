@@ -41,14 +41,15 @@ dependencies {
     compile project(":jokelib")
     compile project(":jokelib_android")
     compile project(path: ':backend', configuration: 'android-endpoints')
-    // Added for AdMob
-    
 
-    //testing
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.google.android.gms:play-services-ads:9.4.0'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     compile 'com.android.support:support-v4:24.2.1'
+
+    //Ad Dependency, only include in free version, results in low apk size of paid app
+    freeCompile 'com.google.android.gms:play-services-ads:9.4.0'
+
+    //testing
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'

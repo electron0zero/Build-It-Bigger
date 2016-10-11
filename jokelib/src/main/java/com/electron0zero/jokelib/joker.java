@@ -5,7 +5,7 @@ import java.util.Random;
 public class joker {
 
     //array of jokes
-    String jokes[] = {
+    private final String jokes[] = {
             "A random joke ",
             "Another random joke ",
             "A third random joke ",
