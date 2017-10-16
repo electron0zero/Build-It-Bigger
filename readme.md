@@ -1,6 +1,6 @@
 # Build it Bigger - Building Java and Android projects with Gradle
 
-Build it Bigger(Project-4) for my Android Nano Degree Program from [Udacity](https://www.udacity.com/)
+Build it Bigger(Project-4) for Android NanoDegree Program from [Udacity](https://www.udacity.com/)
 
 See [Guide.md](https://github.com/electron0zero/Build-It-Bigger/blob/master/guide.md) for more details
 
@@ -33,16 +33,15 @@ Clone and import into Android Studio, That's it.
 
 ## Screenshots
 
-#### Free Version
-
 <p align="center">
-<img src="https://raw.githubusercontent.com/electron0zero/Build-It-Bigger/master/Screenshots/1-free.png" height="300">
-<img src="https://raw.githubusercontent.com/electron0zero/Build-It-Bigger/master/Screenshots/2-free.png" height="300">
-<img src="https://raw.githubusercontent.com/electron0zero/Build-It-Bigger/master/Screenshots/3-free.png" height="300">
+<img src="Screenshots/1.png" height="300">
+<img src="Screenshots/3.png" height="300">
+<br>
+<img src="Screenshots/4.png" height="200">
+<img src="Screenshots/5.png" height="200">
+<br>
+<br>
+<img src="Screenshots/2.png" height="200">
 </p>
 
-#### Paid Version
-<p align="center">
-<img src="https://raw.githubusercontent.com/electron0zero/Build-It-Bigger/master/Screenshots/1-paid.png" height="300">
-<img src="https://raw.githubusercontent.com/electron0zero/Build-It-Bigger/master/Screenshots/2-paid.png" height="300">
-</p>
+see `Screenshots` folder for more
